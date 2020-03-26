@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		https://www.springframework.org/schema/mvc/spring-mvc.xsd 
+		http://www.springframework.org/schema/beans 
+		https://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/context 
+		https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<import resource="classpath:spring-config/spring-mvc.xml"/>
+
+	<!-- dao自动扫描 -->
+	<context:component-scan base-package="cn.sowell.ddxyz.model.*.dao.impl" />
+	<!-- serivce自动扫描 -->
+	<context:component-scan base-package="cn.sowell.ddxyz.model.*.service.impl" />
+	<!-- controller自动扫描(自动注入) -->
+	<context:component-scan base-package="com.sowell.tools.demo.controller" />
+	
+	<!-- 扫描Service -->
+	<context:component-scan base-package="cn.sowell.cpftools.model.*.service.impl" />
+	<!-- 扫描Controller -->
+	<context:component-scan base-package="cn.sowell.cpftools.*.controller.*" />
+	
+	<bean class="cn.sowell.cpftools.model.tag.service.FileUploadUtils">
+		<constructor-arg value="d://tools-files/" />
+		<constructor-arg value="/resources/dfiles/" />
+	</bean>
+	
+	<mvc:resources mapping="/extQrcodes/**" location="/resources/qrcodes/" />
+	
+</beans>
